@@ -16,12 +16,12 @@ id |name | score | pass
 function GradeTableHeader(){
     return(
         <thead>
-        <tr>
-            <th width="50px" align="right">id</th>
-            <th width="100px" align="right">name</th>
-            <th width="100px" align="right">score</th>
-            <th width="100px" align="right">pass</th>
-        </tr>
+            <tr>
+                <th width="50px" align="right">id</th>
+                <th width="100px" align="right">name</th>
+                <th width="100px" align="right">score</th>
+                <th width="100px" align="right">pass</th>
+            </tr>
         </thead>
     )
 }
@@ -41,24 +41,24 @@ function GradeTableBody({grades}){
     )
 }
 //子組件 尾
-function GradeTableFooter({totalScore,count}){
+function GradeTableFooter({averageScore}){
     return(
         <tfoot>
             <tr>
                 <td colSpan="2" align="right">全班平均</td>
-                <td align="right">{(totalScore/count).toFixed(2)}</td>
+                <td align="right">{(averageScore).toFixed(2)}</td>
             </tr>
         </tfoot>
 
     )
 }
 //子組件 融合
-function GradeTable({grades,totalScore,count}){
+function GradeTable({grades,averageScore}){
     return(
         <table style={{ border: '20px solid pink', borderCollapse: 'collapse', width: '100%' }} >
             <GradeTableHeader/>
             <GradeTableBody grades={grades}/>
-            <GradeTableFooter totalScore={totalScore} count={count}/>
+            <GradeTableFooter averageScore={averageScore}/>
         </table>
     )
     
@@ -72,12 +72,12 @@ function App(){
         {id:3,name:'小華',score:92},
         {id:4,name:'阿強',score:40}
     ]
-    const totalScore = grades.reduce( (sum,grade)=>  sum+grade.score,0 )
+    const averageScore = grades.reduce( (sum,grade)=>  sum+grade.score,0 )/grades.length
     const count= grades.length
     
     return (
         <>
-            <GradeTable grades={grades} totalScore={totalScore} count={count}/>
+            <GradeTable grades={grades} averageScore={averageScore}/>
         </>
     )
 }
