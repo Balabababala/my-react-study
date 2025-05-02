@@ -12,7 +12,7 @@ id |name | score | pass
 全班平均
 要猜分 父子組件
 */
-
+//頭
 function GradeTableHeader(){
     return(
         <thead>
