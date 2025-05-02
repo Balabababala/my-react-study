@@ -1,15 +1,19 @@
+//建立組件2種
+//1.function
+//2.()=>函數式
+
 //子組件
 function Hello(){
     return(
         <h1>hello</h1>
     )
-}
+};
 //子組件
-function World(){
-    return(
+const World = () => {
+    return (
         <h1>world</h1>
     )
-}
+};
 
 //父組件
 function App(){
@@ -19,5 +23,5 @@ function App(){
             <World/>
         </>
     )
-}
-export default App
+};
+export default App;
