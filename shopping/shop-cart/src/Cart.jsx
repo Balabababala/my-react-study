@@ -1,5 +1,6 @@
 import { useState } from 'react'
-
+import AddButton from './component/AddButton';
+import ProductList from './component/productList';
 
 function App() {
   const[name,setName]=useState('');
@@ -21,18 +22,30 @@ function App() {
   const productSum =(products)=>{
     return products.reduce((sum,product)=> sum+ Number(product.price),0)           
   }
+  const productDelete=(deleteIndex)=>{
+   setProducts(products.filter((product,index)=>index!==deleteIndex)) ;
+  }
+  const productFix = (fixIndex, name, price) => {
+    setProducts(products.map((product, index) => {
+      if (index === fixIndex) {
+        return {
+          ...product,
+          name,
+          price: Number(price)
+        };
+      }
+      return product;
+    }));
+  };
 
   return (
     <div>
-      <input type='text' value={name} onChange={handleName} placeholder='商品名稱'/>
-      <input type='text' value={price} onChange={handlePrice} placeholder='商品價格'/>
-      <button onClick={productGoGO}>新增商品</button>
+      <AddButton price={price} name={name} handleName={handleName} handlePrice={handlePrice} productGoGO={productGoGO}/>
       <h1>狗物車內容</h1>
-    <ol>
-      {products.map((product)=>(
-
-                  <li> name:{product.name} price: {product.price} </li>))}
-    </ol>
+    <ul>
+      
+      <ProductList products={products} productDelete={productDelete} productFix={productFix}/>
+    </ul>
       Sum:{productSum(products)} 
     </div>
   )
